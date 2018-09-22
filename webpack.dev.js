@@ -1,9 +1,22 @@
 const webpack = require('webpack')
 const path = require('path')
+const nodeExternals = require('webpack-node-externals')
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
+  entry: './app',
+  target: 'node',
+  externals: [nodeExternals()],
+  node: {
+    __dirname: true
+  },
+
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  },
+
   module: {
     rules: [{
       include: [path.resolve(__dirname, 'src')],
@@ -19,13 +32,6 @@ module.exports = {
 
       test: /\.js$/
     }]
-  },
-
-  entry: './app',
-
-  output: {
-    filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist')
   },
 
   mode: 'development',
