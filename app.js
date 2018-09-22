@@ -22,10 +22,10 @@ const fetchCrypto = (currency) => {
 setInterval(() => {
     axios.all([fetchCrypto('BTC'), fetchCrypto('LTC')])
         .then(axios.spread((bitcoin, litecoin) => {
-
             bitcoin = bitcoin.data.data.rates
             litecoin = litecoin.data.data.rates
 
+            // Add price & symbol per fiat currency into object
             Object.keys(bitcoin).map((key) => {
                 bitcoinRates[key] = { price: bitcoin[key], symbol: fiat[key].symbol }
             })
@@ -34,8 +34,9 @@ setInterval(() => {
                 litecoinRates[key] = { price: litecoin[key], symbol: fiat[key].symbol }
             })
         }))
-}, 2000)
+}, 5000)
 
+// express routes
 app.get('/ticker/bitcoin', (req, res) => {
     res.json(bitcoinRates)
 })
