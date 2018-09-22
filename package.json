@@ -1,19 +1,22 @@
 {
-  "name": "ltc-ticker",
+  "name": "zap-ticker",
   "version": "0.1.0",
-  "description": "The best Litecoin ticker",
+  "description": "A ticker for Litecoin & Bitcoin for zap-desktop!",
   "main": "app.js",
   "author": "loshan1212@gmail.com (losh11)",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "",
-    "dev": "yarn run clean && webpack --config webpack.dev.js --progress && node ./dist/main",
-    "clean": "rm -rf ./dist"
+    "start": "yarn run build:prod && node ./dist/main",
+    "dev": "yarn run clean && NODE_ENV=development webpack --config webpack.js --progress && node ./dist/main",
+    "clean": "rm -rf ./dist",
+    "build:prod": "yarn run clean && NODE_ENV=production webpack --config webpack.js --progress"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
+    "helmet": "^3.13.0",
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
