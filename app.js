@@ -27,11 +27,11 @@ setInterval(() => {
 
             // Add price & symbol per fiat currency into object
             Object.keys(bitcoin).map((key) => {
-                bitcoinRates[key] = { price: bitcoin[key], symbol: fiat[key].symbol }
+                bitcoinRates[key] = { price: parseFloat(bitcoin[key]), symbol: fiat[key].symbol }
             })
 
             Object.keys(litecoin).map((key) => {
-                litecoinRates[key] = { price: litecoin[key], symbol: fiat[key].symbol }
+                litecoinRates[key] = { price: parseFloat(litecoin[key]), symbol: fiat[key].symbol }
             })
         }))
 }, 5000)
